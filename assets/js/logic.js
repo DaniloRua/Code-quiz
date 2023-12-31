@@ -7,6 +7,12 @@ let timer = document.getElementById("time");
 const endScreen = document.getElementById("end-screen")
 let count = 75;
 
+// sounds
+var correctSound = new Audio("./assets/sfx/correct.wav");
+    console.log(correctSound)
+var incorrectSound = new Audio("./assets/sfx/incorrect.wav")
+ console.log(incorrectSound)
+
 
 //show and hide functions
 var hide = function (e) {
@@ -42,14 +48,12 @@ function startTimer() {
 
 }
 
-
-
 //populated the questions
 function getQuestions(){
 
-
     questionTitle.textContent = questionsAndAnswers[0].question
     let answersContainer = questionsAndAnswers[0].answers
+    let rightAnswer = questionsAndAnswers[0].correctIndex
     
     for (let i = 0; i < answersContainer.length; i++) {
         let number = i
@@ -57,8 +61,16 @@ function getQuestions(){
         var button = document.createElement("button")
         button.textContent = number+1 + ". " + answersContainer[i]
         choices.appendChild(button)
+        button.addEventListener("click", function(){
+           //check the answer
+            if(i + 1 === rightAnswer){
+                correctSound.play()
+            } else{
+                incorrectSound.play()
+            }
+          }
+        )
     }
-   
    
 }
 
