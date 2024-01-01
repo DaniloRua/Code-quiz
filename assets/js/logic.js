@@ -8,6 +8,9 @@ const endScreen = document.getElementById("end-screen")
 let count = 75;
 // maximum 10 questions
 let numberOfQuestions = ''
+const finalScore = document.getElementById("final-score");
+
+
 
 // sounds
 var correctSound = new Audio("./assets/sfx/correct.wav");
@@ -67,6 +70,7 @@ function getQuestions() {
                     show(endScreen)
                     hide(questions)
                     hide(timer)
+                    finalScore.textContent = count;
                 } else {
                     numberOfQuestions++
                     getQuestions()
@@ -79,6 +83,7 @@ function getQuestions() {
                     show(endScreen)
                     hide(questions)
                     hide(timer)
+                    finalScore.textContent= count;
                 } else {
                     numberOfQuestions++
                     getQuestions()
