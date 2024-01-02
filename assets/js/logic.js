@@ -1,16 +1,18 @@
 const startScreen = document.getElementById("start-screen");
-const startBtn = document.getElementById("start")
+const startBtn = document.getElementById("start");
 const questions = document.getElementById("questions");
 let questionTitle = document.getElementById("question-title");
 let choices = document.getElementById("choices");
 let timer = document.getElementById("time");
-const endScreen = document.getElementById("end-screen")
+const endScreen = document.getElementById("end-screen");
 let count = 75;
 // maximum 10 questions
-let numberOfQuestions = ''
+let numberOfQuestions = '';
 const finalScore = document.getElementById("final-score");
-
-
+const submitScores = document.getElementById("submit");
+let initialsInput = document.getElementById("initials");
+let initialsAndScore = "";
+let scores = [];
 
 // sounds
 var correctSound = new Audio("./assets/sfx/correct.wav");
@@ -66,7 +68,7 @@ function getQuestions() {
             //right
             if (i + 1 === rightAnswer) {
                 correctSound.play()
-                if (numberOfQuestions === 11) {
+                if (numberOfQuestions === 10) {
                     show(endScreen)
                     hide(questions)
                     hide(timer)
@@ -79,11 +81,11 @@ function getQuestions() {
             } else {
                 //penalties
                 incorrectSound.play()
-                if (numberOfQuestions === 11) {
+                if (numberOfQuestions === 10) {
                     show(endScreen)
                     hide(questions)
                     hide(timer)
-                    finalScore.textContent= count;
+                    finalScore.textContent = count;
                 } else {
                     numberOfQuestions++
                     getQuestions()
@@ -101,4 +103,25 @@ function getQuestions() {
     }
 }
 
+
+//add highscores 
+
+// unfortnately I was not able to finish... 
+
+function addHighscores(e) {
+  
+    // let newScore = document.createElement("li")
+    // newScore.textContent = e;
+
+    //store the array
+    // localStorage.setItem("scoreStored", scores);
+}
+
+submitScores.addEventListener("click", function () {
+    initialsAndScore = initialsInput.value + " " + finalScore.textContent
+    scores.push(initialsAndScore)
+        addHighscores(initialsAndScore)
+        initialsInput.value = '';
+    })
+    
 
